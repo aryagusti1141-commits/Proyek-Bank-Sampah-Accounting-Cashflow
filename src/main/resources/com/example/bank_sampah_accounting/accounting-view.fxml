@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<VBox spacing="20.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bank_sampah_accounting.AccountingController">
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+    </padding>
+
+    <VBox spacing="5">
+        <Label text="Laporan Neraca Kas Internal" style="-fx-font-weight: 900; -fx-font-size: 24px; -fx-text-fill: #1A237E;"/>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Saldo Kas Terkini: " style="-fx-font-size: 16px; -fx-text-fill: #424242;"/>
+            <Label fx:id="lblSaldoTerkini" text="Rp 0" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #2E7D32; -fx-background-color: #E8F5E9; -fx-padding: 3 10; -fx-background-radius: 15;"/>
+        </HBox>
+    </VBox>
+
+    <HBox spacing="25.0" VBox.vgrow="ALWAYS">
+
+        <VBox spacing="15" prefWidth="350" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <Label text="Form Transaksi" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #424242;"/>
+
+            <VBox spacing="5">
+                <Label text="Tipe Transaksi:" style="-fx-font-weight: bold; -fx-text-fill: #616161;"/>
+                <ComboBox fx:id="cmbTipe" maxWidth="Infinity" style="-fx-background-color: #F5F5F5; -fx-border-color: #E0E0E0; -fx-border-radius: 5; -fx-padding: 3;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="PENDAPATAN"/>
+                            <String fx:value="PENGELUARAN"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Nominal (Rp):" style="-fx-font-weight: bold; -fx-text-fill: #616161;"/>
+                <TextField fx:id="txtNominal" promptText="Contoh: 50000" style="-fx-padding: 8; -fx-background-radius: 5; -fx-border-color: #E0E0E0; -fx-border-radius: 5;"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Keterangan:" style="-fx-font-weight: bold; -fx-text-fill: #616161;"/>
+                <TextField fx:id="txtKeterangan" promptText="Setoran kardus dari Nasabah" style="-fx-padding: 8; -fx-background-radius: 5; -fx-border-color: #E0E0E0; -fx-border-radius: 5;"/>
+            </VBox>
+
+            <VBox spacing="10" alignment="CENTER" style="-fx-padding: 10 0 0 0;">
+                <Button text="Simpan Baru" fx:id="btnSimpan" onAction="#handleSimpan" maxWidth="Infinity" style="-fx-background-color: linear-gradient(to bottom, #4CAF50, #2E7D32); -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-background-radius: 6; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(46,125,50,0.4), 8, 0, 0, 2);"/>
+
+                <HBox spacing="10">
+                    <Button text="Update Data" fx:id="btnUpdate" onAction="#handleUpdate" disable="true" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: linear-gradient(to bottom, #FF9800, #EF6C00); -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-background-radius: 6; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(239,108,0,0.4), 8, 0, 0, 2);"/>
+
+                    <Button text="Hapus Data" fx:id="btnHapus" onAction="#handleHapus" disable="true" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: linear-gradient(to bottom, #F44336, #C62828); -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-background-radius: 6; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(198,40,40,0.4), 8, 0, 0, 2);"/>
+                </HBox>
+
+                <Button text="Bersihkan Form" onAction="#clearForm" maxWidth="Infinity" style="-fx-background-color: #E0E0E0; -fx-text-fill: #424242; -fx-font-weight: bold; -fx-padding: 10; -fx-background-radius: 6; -fx-cursor: hand;"/>
+            </VBox>
+        </VBox>
+
+        <TableView fx:id="tableJurnal" HBox.hgrow="ALWAYS" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); -fx-background-radius: 8;">
+            <columns>
+                <TableColumn fx:id="colTanggal" text="Tanggal" prefWidth="160"/>
+                <TableColumn fx:id="colTipe" text="Tipe Transaksi" prefWidth="130"/>
+                <TableColumn fx:id="colNominal" text="Nominal (Rp)" prefWidth="150"/>
+                <TableColumn fx:id="colKeterangan" text="Keterangan" prefWidth="250"/>
+            </columns>
+        </TableView>
+
+    </HBox>
+</VBox>
