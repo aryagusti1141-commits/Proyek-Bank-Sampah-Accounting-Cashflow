@@ -9,7 +9,7 @@ public class DatabaseConnection {
 
     private static final String URL = "jdbc:postgresql://db.ctcuqmnrcczinnqenvuo.supabase.co:5432/postgres";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "yVxB9Xib@V&PMvT";
+    private static final String PASSWORD = "MASUKAN_PASSWORD_DISINI";
 
     private DatabaseConnection() {}
 
