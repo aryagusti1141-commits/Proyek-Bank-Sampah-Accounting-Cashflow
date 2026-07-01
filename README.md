@@ -8,11 +8,11 @@ Aplikasi ini dibangun menggunakan arsitektur **Object-Oriented Programming (OOP)
 
 ## 👥 Anggota Tim Pengembang
 
-| Nama Lengkap | NIM |
-| :--- | :--- |
-| **Arya Gusti Pramuditya** | 202510370110217 |
-| **Triaji Bagus Yudha Sakti** | 202510370110164 |
-| **Muhammad Arif Nurdin** | 202510370110190 |
+| Nama Lengkap | NIM | GitHub |
+| :--- | :--- | :--- |
+| **Arya Gusti Pramuditya** | 202510370110217 | [@aryagusti1141-commits](https://github.com/aryagusti1141-commits) |
+| **Triaji Bagus Yudha Sakti** | 202510370110164 | [@triajisakti](https://github.com/triajisakti) |
+| **Muhammad Arif Nurdin** | 202510370110190 | [@ARINCODE-LAB](https://github.com/ARINCODE-LAB) |
 
 ---
 
