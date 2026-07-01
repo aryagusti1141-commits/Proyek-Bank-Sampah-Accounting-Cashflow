@@ -11,6 +11,7 @@ module com.example.bank_sampah_accounting {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires io.github.cdimascio.dotenv.java;
 
     opens com.example.bank_sampah_accounting to javafx.fxml;
     exports com.example.bank_sampah_accounting;
