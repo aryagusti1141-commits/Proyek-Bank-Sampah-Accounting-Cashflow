@@ -15,6 +15,7 @@ public class AccountingController {
 
     @FXML private TableView<JurnalAkuntansi> tableJurnal;
     @FXML private TableColumn<JurnalAkuntansi, String> colTanggal;
+    @FXML private TableColumn<JurnalAkuntansi, String> colNamaUser;
     @FXML private TableColumn<JurnalAkuntansi, String> colTipe;
     @FXML private TableColumn<JurnalAkuntansi, String> colNominal;
     @FXML private TableColumn<JurnalAkuntansi, String> colKeterangan;
@@ -58,6 +59,13 @@ public class AccountingController {
         colTanggal.setCellValueFactory(cell -> {
             if (cell.getValue().getTanggal() != null) {
                 return new SimpleStringProperty(sdf.format(cell.getValue().getTanggal()));
+            }
+            return new SimpleStringProperty("");
+        });
+
+        colNamaUser.setCellValueFactory(cell -> {
+            if (cell.getValue().getNamaUser() != null) {
+                return new SimpleStringProperty(cell.getValue().getNamaUser());
             }
             return new SimpleStringProperty("");
         });

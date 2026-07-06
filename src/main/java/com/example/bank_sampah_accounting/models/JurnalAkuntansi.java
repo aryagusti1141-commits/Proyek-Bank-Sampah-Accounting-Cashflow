@@ -14,6 +14,7 @@ public class JurnalAkuntansi {
     public JurnalAkuntansi() {}
 
     public JurnalAkuntansi(String tipeTransaksi, BigDecimal nominal, String keterangan) {
+        this.tanggal = tanggal;
         this.tipeTransaksi = tipeTransaksi;
         this.nominal = nominal;
         this.keterangan = keterangan;

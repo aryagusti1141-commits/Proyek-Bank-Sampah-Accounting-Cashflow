@@ -27,12 +27,13 @@ public class JurnalAkuntansiDAO implements TransactionLedger<JurnalAkuntansi> {
 
     @Override
     public boolean catatTransaksi(JurnalAkuntansi transaksi) {
-        String sql = "INSERT INTO tb_jurnal_akuntansi (tipe_transaksi, nominal, keterangan) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO tb_jurnal_akuntansi (tipe_transaksi, nominal, keterangan, nama_user) VALUES (?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, transaksi.getTipeTransaksi().toUpperCase());
             ps.setBigDecimal(2, transaksi.getNominal());
             ps.setString(3, transaksi.getKeterangan());
+            ps.setString(4, transaksi.getNamaUser());
             ps.executeUpdate();
 
             sinkronisasiSaldo(); // Update saldo otomatis
@@ -45,13 +46,14 @@ public class JurnalAkuntansiDAO implements TransactionLedger<JurnalAkuntansi> {
 
     @Override
     public boolean updateTransaksi(JurnalAkuntansi transaksi) {
-        String sql = "UPDATE tb_jurnal_akuntansi SET tipe_transaksi = ?, nominal = ?, keterangan = ? WHERE id_jurnal = ?";
+        String sql = "UPDATE tb_jurnal_akuntansi SET tipe_transaksi = ?, nominal = ?, keterangan = ?, nama_user = ? WHERE id_jurnal = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, transaksi.getTipeTransaksi().toUpperCase());
             ps.setBigDecimal(2, transaksi.getNominal());
             ps.setString(3, transaksi.getKeterangan());
-            ps.setInt(4, transaksi.getIdJurnal());
+            ps.setString(4, transaksi.getNamaUser());
+            ps.setInt(5, transaksi.getIdJurnal());
             ps.executeUpdate();
 
             sinkronisasiSaldo(); // Update saldo otomatis
@@ -92,6 +94,7 @@ public class JurnalAkuntansiDAO implements TransactionLedger<JurnalAkuntansi> {
                 jurnal.setTipeTransaksi(rs.getString("tipe_transaksi"));
                 jurnal.setNominal(rs.getBigDecimal("nominal"));
                 jurnal.setKeterangan(rs.getString("keterangan"));
+                jurnal.setNamaUser(rs.getString("nama_user"));
                 listTransaksi.add(jurnal);
             }
         } catch (SQLException e) { e.printStackTrace(); }
