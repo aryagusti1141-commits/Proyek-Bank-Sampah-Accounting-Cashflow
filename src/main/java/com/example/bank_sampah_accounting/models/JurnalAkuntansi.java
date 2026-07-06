@@ -9,6 +9,7 @@ public class JurnalAkuntansi {
     private String tipeTransaksi;
     private BigDecimal nominal;
     private String keterangan;
+    private String namaUser;
 
     public JurnalAkuntansi() {}
 
@@ -52,4 +53,7 @@ public class JurnalAkuntansi {
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
     }
+
+    public String getNamaUser() {return namaUser;}
+    public void setNamaUser(String namaUser) {this.namaUser = namaUser;}
 }

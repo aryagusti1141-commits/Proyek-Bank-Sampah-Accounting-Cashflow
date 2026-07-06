@@ -20,6 +20,7 @@ public class AccountingController {
     @FXML private TableColumn<JurnalAkuntansi, String> colKeterangan;
     @FXML private Label lblSaldoTerkini;
 
+    @FXML private TextField txtNamaUser;
     @FXML private ComboBox<String> cmbTipe;
     @FXML private TextField txtNominal;
     @FXML private TextField txtKeterangan;
@@ -38,6 +39,7 @@ public class AccountingController {
         tableJurnal.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null && !"TOTAL".equals(newSelection.getTipeTransaksi())) {
                 jurnalTerpilih = newSelection;
+                txtNamaUser.setText(jurnalTerpilih.getNamaUser() != null ? jurnalTerpilih.getNamaUser() : "");
                 cmbTipe.setValue(jurnalTerpilih.getTipeTransaksi());
                 txtNominal.setText(jurnalTerpilih.getNominal().toString());
                 txtKeterangan.setText(jurnalTerpilih.getKeterangan());
@@ -106,11 +108,19 @@ public class AccountingController {
     @FXML
     private void handleSimpan() {
         try {
+
+            if (txtNamaUser.getText().trim().isEmpty()) {
+                tampilkanAlert(Alert.AlertType.WARNING, "Validasi Gagal", "Nama User harus diisi!");
+                return;
+            }
+
             JurnalAkuntansi transaksiBaru = new JurnalAkuntansi(
                     cmbTipe.getValue(),
                     new BigDecimal(txtNominal.getText()),
                     txtKeterangan.getText()
             );
+
+            transaksiBaru.setNamaUser(txtNamaUser.getText().trim());
 
             if (jurnalDAO.catatTransaksi(transaksiBaru)) {
                 tampilkanAlert(Alert.AlertType.INFORMATION, "Sukses", "Data berhasil disimpan!");
@@ -129,6 +139,12 @@ public class AccountingController {
     private void handleUpdate() {
         if (jurnalTerpilih != null) {
             try {
+                if (txtNamaUser.getText().trim().isEmpty()) {
+                    tampilkanAlert(Alert.AlertType.WARNING, "Validasi Gagal", "Nama User tidak boleh kosong!");
+                    return;
+                }
+
+                jurnalTerpilih.setNamaUser(txtNamaUser.getText().trim());
                 jurnalTerpilih.setTipeTransaksi(cmbTipe.getValue());
                 jurnalTerpilih.setNominal(new BigDecimal(txtNominal.getText()));
                 jurnalTerpilih.setKeterangan(txtKeterangan.getText());
@@ -157,6 +173,7 @@ public class AccountingController {
 
     @FXML
     private void clearForm() {
+        txtNamaUser.clear();
         cmbTipe.setValue(null);
         txtNominal.clear();
         txtKeterangan.clear();
